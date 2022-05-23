@@ -13,12 +13,12 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @ComponentScan("com.github.AlexanderSobko.MatteoSweetsBot")
 public class SpringConfig {
 
-    @Value("${DB_URL}")
-    String dbURL;
-    @Value("${DB_USERNAME}")
-    String dbUserName;
-    @Value("${DB_PASSWORD}")
-    String dbPassword;
+//    @Value("${DB_URL}")
+//    String dbURL;
+//    @Value("${DB_USERNAME}")
+//    String dbUserName;
+//    @Value("${DB_PASSWORD}")
+//    String dbPassword;
 
     @Bean
     public TelegramBot telegramBot(){
@@ -33,15 +33,15 @@ public class SpringConfig {
             e.printStackTrace();
         }
     }
-
-    @Bean
-    public DriverManagerDataSource dataSource(){
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl(dbURL);
-        dataSource.setPassword(dbPassword);
-        dataSource.setUsername(dbUserName);
-        return dataSource;
-    }
+//
+//    @Bean
+//    public DriverManagerDataSource dataSource(){
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName("org.h2.Driver");
+//        dataSource.setUrl(dbURL);
+//        dataSource.setPassword(dbPassword);
+//        dataSource.setUsername(dbUserName);
+//        return dataSource;
+//    }
 
 }

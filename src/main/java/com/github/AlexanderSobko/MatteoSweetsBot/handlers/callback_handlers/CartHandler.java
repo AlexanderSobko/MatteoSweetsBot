@@ -28,9 +28,10 @@ public class CartHandler extends BaseHandler {
         data[0] = "";
         Integer messageId = null;
 
-        if (data[1].contains("Clear"))
+        if (data[1].contains("Clear")) {
             orderService.clearLastOrder(chatId);
-        else if (data[1].contains("Finish")){
+            messageId = update.getCallbackQuery().getMessage().getMessageId();
+        } else if (data[1].contains("Finish")){
             isPhoneNeeded = false;
             text = orderService.finishOrder(chatId) +
                     "\n\nСпасибо за ваш заказ. В ближайшее время с вами свяжется продавец.\n";
