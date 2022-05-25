@@ -24,13 +24,11 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Getter
     @Value("${BOT_USER_NAME}")
-    private
-    String botUsername;
+    private String botUsername;
 
     @Getter
     @Value("${BOT_TOKEN}")
-    private
-    String botToken;
+    private String botToken;
 
     @Override
     @SneakyThrows

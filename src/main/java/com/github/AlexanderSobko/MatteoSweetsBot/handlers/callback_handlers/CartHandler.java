@@ -7,6 +7,7 @@ import com.github.AlexanderSobko.MatteoSweetsBot.services.OrderService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.PatisserieService;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -18,11 +19,13 @@ import java.util.List;
 public class CartHandler extends BaseHandler {
 
     private final CartButtonHandler cartHandler;
+    private final String ADMIN_ID = "5060682407";
     private String text;
-    private boolean isPhoneNeeded;
+    private String notice;
 
     @Override
     public List<Object> handle(Update update) {
+        List<Object> messages = new ArrayList<>();
         String chatId = update.getCallbackQuery().getMessage().getChatId().toString();
         String[] data = update.getCallbackQuery().getData().split(" ");
         data[0] = "";
@@ -32,28 +35,36 @@ public class CartHandler extends BaseHandler {
             orderService.clearLastOrder(chatId);
             messageId = update.getCallbackQuery().getMessage().getMessageId();
         } else if (data[1].contains("Finish")){
-            isPhoneNeeded = false;
-            text = orderService.finishOrder(chatId) +
+            String orderData = orderService.finishOrder(chatId);
+            text =  orderData +
                     "\n\nСпасибо за ваш заказ. В ближайшее время с вами свяжется продавец.\n";
+            notice = orderData + "\n" + botUserService.getUserById(chatId).toString();
             messageId = update.getCallbackQuery().getMessage().getMessageId();
+            messages.add(getMessage(ADMIN_ID, null, null));
         } else {
             String callbackData = patisserieService.addPatisserieToOrder(data, chatId);
             update.getCallbackQuery().setData(callbackData);
             return cartHandler.handle(update);
         }
 
-        List<Object> messages = new ArrayList<>();
+
         messages.add(getMessage(chatId, null, messageId));
         return messages;
     }
 
     @Override
     protected BotApiMethod<? extends Serializable> getMessage(String chatId, String callbackData, Integer messageId) {
-        return EditMessageText.builder()
-                .text(text)
-                .chatId(chatId)
-                .messageId(messageId)
-                .build();
+        if (messageId == null)
+            return SendMessage.builder()
+                    .text(notice)
+                    .chatId(chatId)
+                    .build();
+        else
+            return EditMessageText.builder()
+                    .text(text)
+                    .chatId(chatId)
+                    .messageId(messageId)
+                    .build();
     }
 
     public CartHandler(BotUserService botUserService,

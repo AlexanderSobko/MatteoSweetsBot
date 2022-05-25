@@ -5,6 +5,7 @@ import com.github.AlexanderSobko.MatteoSweetsBot.services.BotUserService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.OrderService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.PatisserieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -17,7 +18,8 @@ import java.util.List;
 @Component
 public class ConnectOperatorHandler extends BaseHandler {
 
-    private static final String CONTACT_TEXT = "@Matteo_sweets";
+    @Value("${CONTACT_NAME}")
+    private String admin_contact;
 
     @Override
     public List<Object> handle(Update update) {
@@ -25,7 +27,7 @@ public class ConnectOperatorHandler extends BaseHandler {
         Integer messageId = update.getCallbackQuery().getMessage().getMessageId();
 
         List<Object> messages = new ArrayList<>();
-        messages.add(getMessage(chatId, CONTACT_TEXT, messageId));
+        messages.add(getMessage(chatId, null, messageId));
         return messages;
     }
 
@@ -33,7 +35,7 @@ public class ConnectOperatorHandler extends BaseHandler {
     protected BotApiMethod<? extends Serializable> getMessage(String chatId, String callbackData, Integer messageId) {
         return SendMessage.builder()
                 .chatId(chatId)
-                .text(callbackData)
+                .text(admin_contact)
                 .build();
     }
 
