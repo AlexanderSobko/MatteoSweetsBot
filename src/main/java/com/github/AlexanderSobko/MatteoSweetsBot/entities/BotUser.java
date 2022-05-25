@@ -30,7 +30,7 @@ public class BotUser {
     public String toString() {
         return """
                 Имя: %s %s.
-                Контакт: %s.
+                Контакт: @%s.
                 Способ доставки: %s.
                 Адресс доставки: %s.
                 """.formatted(lastName, firstName, userName, deliveryMethod, deliveryAddress);
