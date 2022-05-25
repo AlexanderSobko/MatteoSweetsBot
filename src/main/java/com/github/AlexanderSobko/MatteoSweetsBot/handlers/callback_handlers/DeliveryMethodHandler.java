@@ -36,7 +36,7 @@ public class DeliveryMethodHandler extends BaseHandler {
             text = text + "курьером:\n";
         } else if (callbackData.contains("Pickup")) {
             botUser.setDeliveryMethod("\"Самовывоз\"");
-            botUser.setDeliveryAddress("Адресс: г. Краснодар, ул. 40 лет Победы 33/6");
+            botUser.setDeliveryAddress("г. Краснодар, ул. 40 лет Победы 33/6");
             text = """
                     Способ доставки успешно изменен.
                     Текущий метод доставки:

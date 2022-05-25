@@ -28,7 +28,7 @@ public class DeliveryButtonHandler extends BaseHandler {
 
             Текущий метод доставки:
             %s
-            %s""";
+            Адресс: %s""";
 
     @Override
     public List<Object> handle(Update update) {

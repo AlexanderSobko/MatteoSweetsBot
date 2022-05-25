@@ -35,7 +35,8 @@ public class DefaultMessageHandler extends BaseHandler {
         BotUser botUser = botUserService.getUserById(chatId);
 
         if (botUser.isWaiting()) {
-            botUser.setDeliveryAddress("Адресс: " + text);
+            botUser.setDeliveryAddress(text);
+            botUser.setWaiting(false);
             botUserService.save(botUser);
             text = DELIVERY_METHOD.formatted(botUser.getDeliveryMethod(), text);
             isAddress = true;
@@ -55,13 +56,12 @@ public class DefaultMessageHandler extends BaseHandler {
                     isAddress ?
                         InlineKeyboardMarkup.builder().keyboard(
                                 List.of(
-                                    List.of(InlineKeyboardButton.builder().text("Указать адресс для отправки почтой").callbackData("Post").build()),
-                                    List.of(InlineKeyboardButton.builder().text("Указать адресс для доставки курьером").callbackData("Carrier").build()),
-                                    List.of(InlineKeyboardButton.builder().text("Самовывоз").callbackData("Pickup").build())))
+                                    List.of(InlineKeyboardButton.builder().text("Указать адресс для отправки почтой").callbackData("DeliveryMethod Post").build()),
+                                    List.of(InlineKeyboardButton.builder().text("Указать адресс для доставки курьером").callbackData("DeliveryMethod Carrier").build()),
+                                    List.of(InlineKeyboardButton.builder().text("Самовывоз").callbackData("DeliveryMethod Pickup").build())))
                         .build()
                     :
                      null)
-                .replyToMessageId(messageId)
                 .build();
     }
 
