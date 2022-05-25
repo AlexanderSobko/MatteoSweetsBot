@@ -1,7 +1,6 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.handlers.message_handlers;
 
 import com.github.AlexanderSobko.MatteoSweetsBot.entities.BotUser;
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.Order;
 import com.github.AlexanderSobko.MatteoSweetsBot.handlers.BaseHandler;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.BotUserService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.OrderService;
@@ -28,12 +27,8 @@ public class StartHandler extends BaseHandler {
     @Override
     public List<Object> handle(Update update) {
         BotUser user = botUserService.userToBotUser(update.getMessage().getFrom());
-        if (!botUserService.isPresent(user)) {
-            Order order = new Order();
-            order.setUser(user);
+        if (!botUserService.isPresent(user))
             botUserService.save(user);
-            orderService.save(order);
-        }
 
         List<Object> messages = new ArrayList<>();
         messages.add(getMessage(user.getId(), START_TEXT, null));
