@@ -1,4 +1,4 @@
-###Matteo Sweets Bot
+### Matteo Sweets Bot
 
 This bot was created in order to help customers get acquainted 
 with our products and, if desired, get the opportunity to place
