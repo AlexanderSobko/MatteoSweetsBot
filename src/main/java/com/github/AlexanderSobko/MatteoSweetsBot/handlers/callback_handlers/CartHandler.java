@@ -10,6 +10,8 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,10 +35,10 @@ public class CartHandler extends BaseHandler {
 
         if (data[1].contains("Clear")) {
             orderService.clearLastOrder(chatId);
-            messageId = update.getCallbackQuery().getMessage().getMessageId();
-        } else if (data[1].contains("Finish")){
+            return cartHandler.handle(update);
+        } else if (data[1].contains("Finish")) {
             String orderData = orderService.finishOrder(chatId);
-            text =  orderData +
+            text = orderData +
                     "\n\nСпасибо за ваш заказ. В ближайшее время с вами свяжется продавец.\n";
             notice = orderData + "\n" + botUserService.getUserById(chatId).toString();
             messageId = update.getCallbackQuery().getMessage().getMessageId();
@@ -54,17 +56,10 @@ public class CartHandler extends BaseHandler {
 
     @Override
     protected BotApiMethod<? extends Serializable> getMessage(String chatId, String callbackData, Integer messageId) {
-        if (messageId == null)
-            return SendMessage.builder()
-                    .text(notice)
-                    .chatId(chatId)
-                    .build();
-        else
-            return EditMessageText.builder()
-                    .text(text)
-                    .chatId(chatId)
-                    .messageId(messageId)
-                    .build();
+        return SendMessage.builder()
+                .text(notice)
+                .chatId(chatId)
+                .build();
     }
 
     public CartHandler(BotUserService botUserService,
