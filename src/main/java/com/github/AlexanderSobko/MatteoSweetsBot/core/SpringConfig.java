@@ -34,6 +34,16 @@ public class SpringConfig {
             e.printStackTrace();
         }
     }
+//
+//    @Bean
+//    public DriverManagerDataSource dataSource(){
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName("org.h2.Driver");
+//        dataSource.setUrl(dbURL);
+//        dataSource.setPassword(dbPassword);
+//        dataSource.setUsername(dbUserName);
+//        return dataSource;
+//    }
 
     @Bean
     public DriverManagerDataSource dataSource(){
