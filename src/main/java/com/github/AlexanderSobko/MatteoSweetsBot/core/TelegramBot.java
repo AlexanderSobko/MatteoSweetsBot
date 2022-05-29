@@ -23,7 +23,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     private UpdateHandler updateHandler;
 
     @Getter
-    @Value("${BOT_USER_NAME}")
+    @Value("${BOT_USERNAME}")
     private String botUsername;
 
     @Getter

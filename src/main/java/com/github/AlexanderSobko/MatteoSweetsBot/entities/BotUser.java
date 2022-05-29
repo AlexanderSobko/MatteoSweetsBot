@@ -22,17 +22,8 @@ public class BotUser {
 
     private String deliveryMethod = "\"Самовывоз\"";
 
-    private String deliveryAddress = "г. Краснодар, ул. 40 лет Победы 33/6";
+    private String deliveryAddress = "Адресс: г. Краснодар, ул. 40 лет Победы 33/6";
 
     private boolean waiting;
 
-    @Override
-    public String toString() {
-        return """
-                Имя: %s %s.
-                Контакт: @%s.
-                Способ доставки: %s.
-                Адресс доставки: %s.
-                """.formatted(lastName, firstName, userName, deliveryMethod, deliveryAddress);
-    }
 }
