@@ -2,6 +2,7 @@ package com.github.AlexanderSobko.MatteoSweetsBot.handlers.callback_handlers;
 
 import com.github.AlexanderSobko.MatteoSweetsBot.entities.BotUser;
 import com.github.AlexanderSobko.MatteoSweetsBot.handlers.BaseHandler;
+import com.github.AlexanderSobko.MatteoSweetsBot.models.UserStatus;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.BotUserService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.OrderService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.PatisserieService;
@@ -43,7 +44,7 @@ public class DeliveryMethodHandler extends BaseHandler {
                     "Самовывоз"
                     Адресс: г. Краснодар, ул. 40 лет Победы 33/6""";
         }
-        botUser.setWaiting(true);
+        botUserService.setUserStatus(chatId, UserStatus.SET_ADDRESS);
         botUserService.save(botUser);
 
         List<Object> messages = new ArrayList<>();

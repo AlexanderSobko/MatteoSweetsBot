@@ -1,6 +1,8 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.services;
 
+import com.github.AlexanderSobko.MatteoSweetsBot.entities.BotUser;
 import com.github.AlexanderSobko.MatteoSweetsBot.entities.Order;
+import com.github.AlexanderSobko.MatteoSweetsBot.models.OrderStatus;
 import com.github.AlexanderSobko.MatteoSweetsBot.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,8 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     public List<Order> findAllByUserId(String userId) {
-        return orderRepository.findAllByUserId(userId);
+        BotUser botUser = botUserService.getUserById(userId);
+        return orderRepository.findAllByUserId(botUser.getId());
     }
 
     public void save(Order order) {
@@ -35,7 +38,8 @@ public class OrderService {
     }
 
     public Order getLastOrder(String userId) {
-        Order order = orderRepository.findByUserIdAndFinished(userId, false);
+        BotUser botUser = botUserService.getUserById(userId);
+        Order order = orderRepository.findByUserIdAndOrderStatus(botUser.getId(), null);
         if (order == null){
             order = new Order(botUserService.getUserById(userId));
             orderRepository.save(order);
@@ -45,7 +49,7 @@ public class OrderService {
 
     public String finishOrder(String userId) {
         Order order = getLastOrder(userId);
-        order.setFinished(true);
+        order.setOrderStatus(OrderStatus.PENDING_PAYMENT);
         order.setDate(LocalDateTime.now());
         orderRepository.save(order);
         return getOrderInfo(order);

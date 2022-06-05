@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -44,4 +45,8 @@ public class SpringConfig {
         return dataSource;
     }
 
+    @Bean
+    public ByteArrayHttpMessageConverter byteArrayHttpMessageConverter() {
+        return new ByteArrayHttpMessageConverter();
+    }
 }

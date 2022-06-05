@@ -9,9 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MatteoSweetsBotApplication {
 
     public static void main(String[] args) {
-
         SpringApplication.run(SpringConfig.class,args);
-
     }
 
 }
