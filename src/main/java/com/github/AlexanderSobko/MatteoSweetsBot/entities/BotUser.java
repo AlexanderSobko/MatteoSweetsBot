@@ -32,12 +32,9 @@ public class BotUser {
     @Type(type = "org.hibernate.type.ImageType")
     private byte[] photo;
 
-
     private String deliveryMethod = "\"Самовывоз\"";
 
     private String deliveryAddress = "г. Краснодар, ул. 40 лет Победы 33/6";
-
-    private boolean waiting;
 
     @Override
     public String toString() {
