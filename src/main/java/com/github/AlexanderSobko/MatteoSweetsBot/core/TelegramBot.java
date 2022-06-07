@@ -1,6 +1,7 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.core;
 
 import com.github.AlexanderSobko.MatteoSweetsBot.handlers.UpdateHandler;
+import com.github.AlexanderSobko.MatteoSweetsBot.services.RestService;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.SneakyThrows;

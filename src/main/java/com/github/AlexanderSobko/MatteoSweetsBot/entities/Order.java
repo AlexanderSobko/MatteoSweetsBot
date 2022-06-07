@@ -1,5 +1,6 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.entities;
 
+import com.github.AlexanderSobko.MatteoSweetsBot.models.OrderStatus;
 import com.github.AlexanderSobko.MatteoSweetsBot.models.PatisserieType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,7 @@ public class Order {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     private BotUser user;
 
     private LocalDateTime date;
@@ -28,7 +29,10 @@ public class Order {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "order",cascade = CascadeType.REMOVE)
     private List<Patisserie> patisseries = new ArrayList<>();
 
-    private boolean finished = false;
+    @Enumerated(value = EnumType.STRING)
+    private OrderStatus orderStatus;
+
+    private Integer totalPrice;
 
     @Override
     public String toString() {

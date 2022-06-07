@@ -34,6 +34,8 @@ public class Patisserie {
 
     private String flavor;
 
+    private Integer price;
+
     @Override
     public String toString() {
         if (patisserieType.equals(PatisserieType.CAKE)) {

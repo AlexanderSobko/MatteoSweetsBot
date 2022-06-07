@@ -34,9 +34,9 @@ public class DefaultMessageHandler extends BaseHandler {
         String text = update.getMessage().getText();
         BotUser botUser = botUserService.getUserById(chatId);
 
-        if (botUser.isWaiting()) {
+        if (botUserService.getUserStatus(chatId) != null) {
             botUser.setDeliveryAddress(text);
-            botUser.setWaiting(false);
+            botUserService.setUserStatus(chatId, null);
             botUserService.save(botUser);
             text = DELIVERY_METHOD.formatted(botUser.getDeliveryMethod(), text);
             isAddress = true;

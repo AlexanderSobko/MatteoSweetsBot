@@ -5,6 +5,7 @@ import com.github.AlexanderSobko.MatteoSweetsBot.handlers.BaseHandler;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.BotUserService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.OrderService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.PatisserieService;
+import com.github.AlexanderSobko.MatteoSweetsBot.services.RestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -23,15 +24,18 @@ import java.util.List;
 public class StartHandler extends BaseHandler {
 
     private static final String START_TEXT = "Добро пожаловать!";
+    private final RestService restService;
 
     @Override
     public List<Object> handle(Update update) {
         BotUser user = botUserService.userToBotUser(update.getMessage().getFrom());
-        if (!botUserService.isPresent(user))
+        if (botUserService.getUserById(user.getTelegramId()) == null) {
+            user.setPhoto(restService.getUserPhoto(user.getTelegramId()));
             botUserService.save(user);
+        }
 
         List<Object> messages = new ArrayList<>();
-        messages.add(getMessage(user.getId(), START_TEXT, null));
+        messages.add(getMessage(user.getTelegramId(), START_TEXT, null));
         return messages;
     }
 
@@ -57,7 +61,8 @@ public class StartHandler extends BaseHandler {
     @Autowired
     public StartHandler(BotUserService botUserService,
                         OrderService orderService,
-                        PatisserieService patisserieService) {
+                        PatisserieService patisserieService, RestService restService) {
         super(botUserService, orderService, patisserieService);
+        this.restService = restService;
     }
 }
