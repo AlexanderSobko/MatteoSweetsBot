@@ -32,9 +32,11 @@ public class BotUser {
     @Type(type = "org.hibernate.type.ImageType")
     private byte[] photo;
 
+
     private String deliveryMethod = "\"Самовывоз\"";
 
-    private String deliveryAddress = "Адресс: г. Краснодар, ул. 40 лет Победы 33/6";
+    private String deliveryAddress = " г. Краснодар, ул. 40 лет Победы 33/6";
+
 
     @Override
     public String toString() {
@@ -47,4 +49,5 @@ public class BotUser {
                 deliveryAddress = %s
                 """.formatted(telegramId,firstName,lastName, userName, deliveryMethod,deliveryAddress);
     }
+
 }
