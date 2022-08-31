@@ -1,8 +1,8 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.handlers.message_handlers;
 
+import com.github.AlexanderSobko.MatteoSweetsBot.enums.PatisserieType;
 import com.github.AlexanderSobko.MatteoSweetsBot.handlers.BaseHandler;
-import com.github.AlexanderSobko.MatteoSweetsBot.models.PatisserieType;
-import com.github.AlexanderSobko.MatteoSweetsBot.services.BotUserService;
+import com.github.AlexanderSobko.MatteoSweetsBot.services.UserService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.OrderService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.PatisserieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,9 +74,9 @@ public class CatalogButtonHandler extends BaseHandler {
     }
 
     @Autowired
-    public CatalogButtonHandler(BotUserService botUserService,
+    public CatalogButtonHandler(UserService UserService,
                                 OrderService orderService,
                                 PatisserieService patisserieService) {
-        super(botUserService, orderService, patisserieService);
+        super(UserService, orderService, patisserieService);
     }
 }

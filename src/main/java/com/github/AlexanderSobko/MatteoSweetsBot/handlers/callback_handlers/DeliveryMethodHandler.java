@@ -1,9 +1,9 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.handlers.callback_handlers;
 
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.BotUser;
+import com.github.AlexanderSobko.MatteoSweetsBot.entities.User;
 import com.github.AlexanderSobko.MatteoSweetsBot.handlers.BaseHandler;
 import com.github.AlexanderSobko.MatteoSweetsBot.models.UserStatus;
-import com.github.AlexanderSobko.MatteoSweetsBot.services.BotUserService;
+import com.github.AlexanderSobko.MatteoSweetsBot.services.UserService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.OrderService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.PatisserieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,25 +27,25 @@ public class DeliveryMethodHandler extends BaseHandler {
         Integer messageId = update.getCallbackQuery().getMessage().getMessageId();
         String callbackData = update.getCallbackQuery().getData();
         String text = "Укажите адресс доставки ";
-        BotUser botUser = botUserService.getUserById(chatId);
+        User User = UserService.getUserByTelegramId(chatId);
 
         if (callbackData.contains("Post")) {
-            botUser.setDeliveryMethod("\"Почтой\"");
+            User.setDeliveryMethod("\"Почтой\"");
             text = text + "почтой:\n";
         } else if (callbackData.contains("Carrier")) {
-            botUser.setDeliveryMethod("\"Курьером\"");
+            User.setDeliveryMethod("\"Курьером\"");
             text = text + "курьером:\n";
         } else if (callbackData.contains("Pickup")) {
-            botUser.setDeliveryMethod("\"Самовывоз\"");
-            botUser.setDeliveryAddress("г. Краснодар, ул. 40 лет Победы 33/6");
+            User.setDeliveryMethod("\"Самовывоз\"");
+            User.setDeliveryAddress("г. Краснодар, ул. 40 лет Победы 33/6");
             text = """
                     Способ доставки успешно изменен.
                     Текущий метод доставки:
                     "Самовывоз"
                     Адресс: г. Краснодар, ул. 40 лет Победы 33/6""";
         }
-        botUserService.setUserStatus(chatId, UserStatus.SET_ADDRESS);
-        botUserService.save(botUser);
+        UserService.setUserStatus(chatId, UserStatus.SET_ADDRESS);
+        UserService.save(User);
 
         List<Object> messages = new ArrayList<>();
         messages.add(getMessage(chatId, text, messageId));
@@ -72,9 +72,9 @@ public class DeliveryMethodHandler extends BaseHandler {
     }
 
     @Autowired
-    public DeliveryMethodHandler(BotUserService botUserService,
+    public DeliveryMethodHandler(UserService UserService,
                                  OrderService orderService,
                                  PatisserieService patisserieService) {
-        super(botUserService, orderService, patisserieService);
+        super(UserService, orderService, patisserieService);
     }
 }

@@ -1,13 +1,15 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.entities;
 
-import com.github.AlexanderSobko.MatteoSweetsBot.models.PatisserieSubType;
-import com.github.AlexanderSobko.MatteoSweetsBot.models.PatisserieType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.AlexanderSobko.MatteoSweetsBot.enums.PatisserieSubType;
+import com.github.AlexanderSobko.MatteoSweetsBot.enums.PatisserieType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-import static com.github.AlexanderSobko.MatteoSweetsBot.models.PatisserieSubType.*;
+import static com.github.AlexanderSobko.MatteoSweetsBot.enums.PatisserieSubType.*;
+import static com.github.AlexanderSobko.MatteoSweetsBot.enums.PatisserieSubType.MOUSSE_CAKE;
 
 @Data
 @Entity
@@ -22,8 +24,9 @@ public class Patisserie {
     @Enumerated(value = EnumType.STRING)
     private PatisserieType patisserieType;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "order_id",nullable = false)
+    @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
     @Column

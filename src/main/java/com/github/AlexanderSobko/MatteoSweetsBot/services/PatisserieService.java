@@ -2,8 +2,8 @@ package com.github.AlexanderSobko.MatteoSweetsBot.services;
 
 import com.github.AlexanderSobko.MatteoSweetsBot.entities.Order;
 import com.github.AlexanderSobko.MatteoSweetsBot.entities.Patisserie;
-import com.github.AlexanderSobko.MatteoSweetsBot.models.PatisserieSubType;
-import com.github.AlexanderSobko.MatteoSweetsBot.models.PatisserieType;
+import com.github.AlexanderSobko.MatteoSweetsBot.enums.PatisserieSubType;
+import com.github.AlexanderSobko.MatteoSweetsBot.enums.PatisserieType;
 import com.github.AlexanderSobko.MatteoSweetsBot.repositories.PatisserieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

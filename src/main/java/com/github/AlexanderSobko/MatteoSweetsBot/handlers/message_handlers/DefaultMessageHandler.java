@@ -1,8 +1,8 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.handlers.message_handlers;
 
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.BotUser;
+import com.github.AlexanderSobko.MatteoSweetsBot.entities.User;
 import com.github.AlexanderSobko.MatteoSweetsBot.handlers.BaseHandler;
-import com.github.AlexanderSobko.MatteoSweetsBot.services.BotUserService;
+import com.github.AlexanderSobko.MatteoSweetsBot.services.UserService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.OrderService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.PatisserieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +32,13 @@ public class DefaultMessageHandler extends BaseHandler {
         isAddress = false;
         String chatId = update.getMessage().getFrom().getId().toString();
         String text = update.getMessage().getText();
-        BotUser botUser = botUserService.getUserById(chatId);
+        User User = UserService.getUserByTelegramId(chatId);
 
-        if (botUserService.getUserStatus(chatId) != null) {
-            botUser.setDeliveryAddress(text);
-            botUserService.setUserStatus(chatId, null);
-            botUserService.save(botUser);
-            text = DELIVERY_METHOD.formatted(botUser.getDeliveryMethod(), text);
+        if (UserService.getUserStatus(chatId) != null) {
+            User.setDeliveryAddress(text);
+            UserService.setUserStatus(chatId, null);
+            UserService.save(User);
+            text = DELIVERY_METHOD.formatted(User.getDeliveryMethod(), text);
             isAddress = true;
         }
 
@@ -66,9 +66,9 @@ public class DefaultMessageHandler extends BaseHandler {
     }
 
     @Autowired
-    public DefaultMessageHandler(BotUserService botUserService,
+    public DefaultMessageHandler(UserService UserService,
                                  OrderService orderService,
                                  PatisserieService patisserieService) {
-        super(botUserService, orderService, patisserieService);
+        super(UserService, orderService, patisserieService);
     }
 }

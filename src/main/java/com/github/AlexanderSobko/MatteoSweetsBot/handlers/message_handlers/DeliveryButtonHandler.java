@@ -1,8 +1,8 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.handlers.message_handlers;
 
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.BotUser;
+import com.github.AlexanderSobko.MatteoSweetsBot.entities.User;
 import com.github.AlexanderSobko.MatteoSweetsBot.handlers.BaseHandler;
-import com.github.AlexanderSobko.MatteoSweetsBot.services.BotUserService;
+import com.github.AlexanderSobko.MatteoSweetsBot.services.UserService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.OrderService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.PatisserieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +34,9 @@ public class DeliveryButtonHandler extends BaseHandler {
     public List<Object> handle(Update update) {
         String chatId = update.getMessage().getChatId().toString();
 
-        BotUser botUser = botUserService.getUserById(chatId);
-        String deliveryMethod = botUser.getDeliveryMethod();
-        String deliveryAddress = botUser.getDeliveryAddress();
+        User User = UserService.getUserByTelegramId(chatId);
+        String deliveryMethod = User.getDeliveryMethod();
+        String deliveryAddress = User.getDeliveryAddress();
 
         List<Object> messages = new ArrayList<>();
         messages.add(getMessage(chatId, DELIVERY_TEXT.formatted(deliveryMethod, deliveryAddress), null));
@@ -60,9 +60,9 @@ public class DeliveryButtonHandler extends BaseHandler {
     }
 
     @Autowired
-    public DeliveryButtonHandler(BotUserService botUserService,
+    public DeliveryButtonHandler(UserService UserService,
                                  OrderService orderService,
                                  PatisserieService patisserieService) {
-        super(botUserService, orderService, patisserieService);
+        super(UserService, orderService, patisserieService);
     }
 }

@@ -1,8 +1,10 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.services;
 
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.BotUser;
+import com.github.AlexanderSobko.MatteoSweetsBot.entities.User;
 import com.github.AlexanderSobko.MatteoSweetsBot.entities.Order;
-import com.github.AlexanderSobko.MatteoSweetsBot.models.OrderStatus;
+import com.github.AlexanderSobko.MatteoSweetsBot.enums.OrderStatus;
+import com.github.AlexanderSobko.MatteoSweetsBot.exceptions.ResourceNotFoundException;
+import com.github.AlexanderSobko.MatteoSweetsBot.models.dtos.OrderDTO;
 import com.github.AlexanderSobko.MatteoSweetsBot.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,16 +16,16 @@ import java.util.List;
 @Service
 public class OrderService {
 
-    private final BotUserService botUserService;
+    private final UserService UserService;
     private final OrderRepository orderRepository;
 
     public List<Order> findAllByUserId(String userId) {
-        BotUser botUser = botUserService.getUserById(userId);
-        return orderRepository.findAllByUserId(botUser.getId());
+        User User = UserService.getUserByTelegramId(userId);
+        return orderRepository.findAllByUserId(User.getId());
     }
 
-    public void save(Order order) {
-        orderRepository.save(order);
+    public Order save(Order order) {
+        return orderRepository.save(order);
     }
 
     public void clearLastOrder(String chatId) {
@@ -32,16 +34,17 @@ public class OrderService {
     }
 
     @Autowired
-    public OrderService(BotUserService botUserService, OrderRepository orderRepository) {
-        this.botUserService = botUserService;
+    public OrderService(UserService UserService, OrderRepository orderRepository) {
+        this.UserService = UserService;
         this.orderRepository = orderRepository;
     }
 
     public Order getLastOrder(String userId) {
-        BotUser botUser = botUserService.getUserById(userId);
-        Order order = orderRepository.findByUserIdAndOrderStatus(botUser.getId(), null);
+        User User = UserService.getUserByTelegramId(userId);
+        Order order = orderRepository.findByUserIdAndOrderStatus(User.getId(), null);
         if (order == null){
-            order = new Order(botUserService.getUserById(userId));
+            order = new Order();
+            order.setUser(UserService.getUserByTelegramId(userId));
             orderRepository.save(order);
         }
         return order;
@@ -75,5 +78,31 @@ public class OrderService {
                 
                 Дата: %s
                 """.formatted(order.getId(), order.toString(), date);
+    }
+
+    public List<Order> getOrders() {
+        return orderRepository.findAll();
+    }
+
+    public OrderDTO getOrderDTO(Long id) {
+        return orderToOrderDTO(orderRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found " + id)));
+    }
+
+    private OrderDTO orderToOrderDTO(Order order) {
+        return new OrderDTO(
+                order.getId(),
+                order.getUser().getFirstName(),
+                order.getUser().getLastName(),
+                order.getDate(),
+                order.toString(),
+                order.getPatisseries(),
+                order.getOrderStatus(),
+                order.getTotalPrice(),
+                order.getUser().getDeliveryMethod(),
+                order.getUser().getDeliveryAddress());
+    }
+
+    public void deleteOrder(Long id) {
+        orderRepository.deleteById(id);
     }
 }

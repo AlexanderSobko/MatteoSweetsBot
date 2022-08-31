@@ -2,16 +2,13 @@ package com.github.AlexanderSobko.MatteoSweetsBot.handlers.callback_handlers;
 
 import com.github.AlexanderSobko.MatteoSweetsBot.handlers.BaseHandler;
 import com.github.AlexanderSobko.MatteoSweetsBot.handlers.message_handlers.CartButtonHandler;
-import com.github.AlexanderSobko.MatteoSweetsBot.services.BotUserService;
+import com.github.AlexanderSobko.MatteoSweetsBot.services.UserService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.OrderService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.PatisserieService;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,7 +37,7 @@ public class CartHandler extends BaseHandler {
             String orderData = orderService.finishOrder(chatId);
             text = orderData +
                     "\n\nСпасибо за ваш заказ. В ближайшее время с вами свяжется продавец.\n";
-            notice = orderData + "\n" + botUserService.getUserById(chatId).toString();
+            notice = orderData + "\n" + UserService.getUserByTelegramId(chatId).toString();
             messageId = update.getCallbackQuery().getMessage().getMessageId();
             messages.add(getMessage(ADMIN_ID, null, null));
         } else {
@@ -62,11 +59,11 @@ public class CartHandler extends BaseHandler {
                 .build();
     }
 
-    public CartHandler(BotUserService botUserService,
+    public CartHandler(UserService UserService,
                        OrderService orderService,
                        PatisserieService patisserieService,
                        CartButtonHandler cartHandler) {
-        super(botUserService, orderService, patisserieService);
+        super(UserService, orderService, patisserieService);
         this.cartHandler = cartHandler;
     }
 }

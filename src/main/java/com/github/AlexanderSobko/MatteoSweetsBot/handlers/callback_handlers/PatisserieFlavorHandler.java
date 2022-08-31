@@ -1,7 +1,7 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.handlers.callback_handlers;
 
 import com.github.AlexanderSobko.MatteoSweetsBot.handlers.BaseHandler;
-import com.github.AlexanderSobko.MatteoSweetsBot.services.BotUserService;
+import com.github.AlexanderSobko.MatteoSweetsBot.services.UserService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.OrderService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.PatisserieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,9 +57,9 @@ public class PatisserieFlavorHandler extends BaseHandler {
     }
 
     @Autowired
-    public PatisserieFlavorHandler(BotUserService botUserService,
+    public PatisserieFlavorHandler(UserService UserService,
                                    OrderService orderService,
                                    PatisserieService patisserieService) {
-        super(botUserService, orderService, patisserieService);
+        super(UserService, orderService, patisserieService);
     }
 }

@@ -1,4 +1,4 @@
-package com.github.AlexanderSobko.MatteoSweetsBot.models;
+package com.github.AlexanderSobko.MatteoSweetsBot.enums;
 
 public enum OrderStatus {
     PENDING_PAYMENT,

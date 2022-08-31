@@ -2,7 +2,7 @@ package com.github.AlexanderSobko.MatteoSweetsBot.handlers.message_handlers;
 
 
 import com.github.AlexanderSobko.MatteoSweetsBot.handlers.BaseHandler;
-import com.github.AlexanderSobko.MatteoSweetsBot.services.BotUserService;
+import com.github.AlexanderSobko.MatteoSweetsBot.services.UserService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.OrderService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.PatisserieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +53,9 @@ public class HelpButtonHandler extends BaseHandler {
     }
 
     @Autowired
-    public HelpButtonHandler(BotUserService botUserService,
+    public HelpButtonHandler(UserService UserService,
                              OrderService orderService,
                              PatisserieService patisserieService) {
-        super(botUserService, orderService, patisserieService);
+        super(UserService, orderService, patisserieService);
     }
 }

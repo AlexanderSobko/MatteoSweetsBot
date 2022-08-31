@@ -1,8 +1,8 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.handlers.message_handlers;
 
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.BotUser;
+import com.github.AlexanderSobko.MatteoSweetsBot.entities.User;
 import com.github.AlexanderSobko.MatteoSweetsBot.handlers.BaseHandler;
-import com.github.AlexanderSobko.MatteoSweetsBot.services.BotUserService;
+import com.github.AlexanderSobko.MatteoSweetsBot.services.UserService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.OrderService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.PatisserieService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.RestService;
@@ -28,14 +28,14 @@ public class StartHandler extends BaseHandler {
 
     @Override
     public List<Object> handle(Update update) {
-        BotUser user = botUserService.userToBotUser(update.getMessage().getFrom());
-        if (botUserService.getUserById(user.getTelegramId()) == null) {
-            user.setPhoto(restService.getUserPhoto(user.getTelegramId()));
-            botUserService.save(user);
+        User User = UserService.userToBotUser(update.getMessage().getFrom());
+        if (UserService.getUserByTelegramId(User.getTelegramId()) == null) {
+            User.setPhoto(restService.getUserPhoto(User.getTelegramId()));
+            UserService.save(User);
         }
 
         List<Object> messages = new ArrayList<>();
-        messages.add(getMessage(user.getTelegramId(), START_TEXT, null));
+        messages.add(getMessage(User.getTelegramId(), START_TEXT, null));
         return messages;
     }
 
@@ -59,10 +59,10 @@ public class StartHandler extends BaseHandler {
     }
 
     @Autowired
-    public StartHandler(BotUserService botUserService,
+    public StartHandler(UserService UserService,
                         OrderService orderService,
                         PatisserieService patisserieService, RestService restService) {
-        super(botUserService, orderService, patisserieService);
+        super(UserService, orderService, patisserieService);
         this.restService = restService;
     }
 }

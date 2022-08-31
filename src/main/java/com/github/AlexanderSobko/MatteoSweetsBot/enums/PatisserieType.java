@@ -1,8 +1,9 @@
-package com.github.AlexanderSobko.MatteoSweetsBot.models;
+package com.github.AlexanderSobko.MatteoSweetsBot.enums;
 
 import java.util.List;
 
-import static com.github.AlexanderSobko.MatteoSweetsBot.models.PatisserieSubType.*;
+import static com.github.AlexanderSobko.MatteoSweetsBot.enums.PatisserieSubType.*;
+
 
 public enum PatisserieType {
 

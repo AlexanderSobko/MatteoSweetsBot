@@ -1,7 +1,7 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.entities;
 
-import com.github.AlexanderSobko.MatteoSweetsBot.models.OrderStatus;
-import com.github.AlexanderSobko.MatteoSweetsBot.models.PatisserieType;
+import com.github.AlexanderSobko.MatteoSweetsBot.enums.OrderStatus;
+import com.github.AlexanderSobko.MatteoSweetsBot.enums.PatisserieType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,13 +20,13 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
-    private BotUser user;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     private LocalDateTime date;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order",cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade = CascadeType.REMOVE)
     private List<Patisserie> patisseries = new ArrayList<>();
 
     @Enumerated(value = EnumType.STRING)
@@ -49,7 +49,4 @@ public class Order {
         return chocolateList + cakeList;
     }
 
-    public Order(BotUser botUser) {
-        this.user = botUser;
-    }
 }
