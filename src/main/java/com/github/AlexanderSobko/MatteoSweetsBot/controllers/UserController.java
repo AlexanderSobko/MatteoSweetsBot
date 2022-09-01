@@ -1,6 +1,6 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.controllers;
 
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.User;
+import com.github.AlexanderSobko.MatteoSweetsBot.models.entities.User;
 import com.github.AlexanderSobko.MatteoSweetsBot.exceptions.ResourceNotFoundException;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

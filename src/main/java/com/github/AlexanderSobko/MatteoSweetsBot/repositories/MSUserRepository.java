@@ -1,6 +1,6 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.repositories;
 
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.User;
+import com.github.AlexanderSobko.MatteoSweetsBot.models.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

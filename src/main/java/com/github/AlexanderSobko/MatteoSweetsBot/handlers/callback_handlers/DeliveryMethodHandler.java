@@ -1,6 +1,6 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.handlers.callback_handlers;
 
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.User;
+import com.github.AlexanderSobko.MatteoSweetsBot.models.entities.User;
 import com.github.AlexanderSobko.MatteoSweetsBot.handlers.BaseHandler;
 import com.github.AlexanderSobko.MatteoSweetsBot.models.UserStatus;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.UserService;

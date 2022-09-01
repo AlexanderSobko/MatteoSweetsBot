@@ -1,4 +1,4 @@
-package com.github.AlexanderSobko.MatteoSweetsBot.entities;
+package com.github.AlexanderSobko.MatteoSweetsBot.models.entities;
 
 import com.github.AlexanderSobko.MatteoSweetsBot.enums.OrderStatus;
 import com.github.AlexanderSobko.MatteoSweetsBot.enums.PatisserieType;

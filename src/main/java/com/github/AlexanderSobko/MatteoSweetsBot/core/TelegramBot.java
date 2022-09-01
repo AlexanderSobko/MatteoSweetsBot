@@ -21,15 +21,15 @@ import java.util.List;
 public class TelegramBot extends TelegramLongPollingBot {
 
     @Autowired
-    private UpdateHandler updateHandler;
+    UpdateHandler updateHandler;
 
     @Getter
     @Value("${BOT_USERNAME}")
-    private String botUsername;
+    String botUsername;
 
     @Getter
     @Value("${BOT_TOKEN}")
-    private String botToken;
+    String botToken;
 
     @Override
     @SneakyThrows

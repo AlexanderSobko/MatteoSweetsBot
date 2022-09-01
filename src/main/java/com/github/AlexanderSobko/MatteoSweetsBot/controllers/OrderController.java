@@ -1,6 +1,6 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.controllers;
 
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.Order;
+import com.github.AlexanderSobko.MatteoSweetsBot.models.entities.Order;
 import com.github.AlexanderSobko.MatteoSweetsBot.models.dtos.OrderDTO;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;

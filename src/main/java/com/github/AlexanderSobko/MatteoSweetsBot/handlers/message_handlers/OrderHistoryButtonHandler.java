@@ -1,6 +1,6 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.handlers.message_handlers;
 
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.Order;
+import com.github.AlexanderSobko.MatteoSweetsBot.models.entities.Order;
 import com.github.AlexanderSobko.MatteoSweetsBot.handlers.BaseHandler;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.UserService;
 import com.github.AlexanderSobko.MatteoSweetsBot.services.PatisserieService;

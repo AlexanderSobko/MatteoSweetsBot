@@ -1,6 +1,6 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.services;
 
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.User;
+import com.github.AlexanderSobko.MatteoSweetsBot.models.entities.User;
 import com.github.AlexanderSobko.MatteoSweetsBot.models.UserStatus;
 import com.github.AlexanderSobko.MatteoSweetsBot.repositories.MSUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

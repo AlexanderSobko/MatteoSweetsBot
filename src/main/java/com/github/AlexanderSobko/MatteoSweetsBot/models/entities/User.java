@@ -1,4 +1,4 @@
-package com.github.AlexanderSobko.MatteoSweetsBot.entities;
+package com.github.AlexanderSobko.MatteoSweetsBot.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -42,7 +42,7 @@ public class User {
 
     private String deliveryMethod = "\"Самовывоз\"";
 
-    private String deliveryAddress = "Адресс: г. Краснодар, ул. 40 лет Победы 33/6";
+    private String deliveryAddress = "г. Краснодар, ул. 40 лет Победы 33/6";
 
     @Override
     public String toString() {

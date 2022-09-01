@@ -1,7 +1,7 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.services;
 
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.User;
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.Order;
+import com.github.AlexanderSobko.MatteoSweetsBot.models.entities.User;
+import com.github.AlexanderSobko.MatteoSweetsBot.models.entities.Order;
 import com.github.AlexanderSobko.MatteoSweetsBot.enums.OrderStatus;
 import com.github.AlexanderSobko.MatteoSweetsBot.exceptions.ResourceNotFoundException;
 import com.github.AlexanderSobko.MatteoSweetsBot.models.dtos.OrderDTO;
@@ -20,8 +20,8 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     public List<Order> findAllByUserId(String userId) {
-        User User = UserService.getUserByTelegramId(userId);
-        return orderRepository.findAllByUserId(User.getId());
+        User user = UserService.getUserByTelegramId(userId);
+        return orderRepository.findAllByUserId(user.getId());
     }
 
     public Order save(Order order) {
@@ -40,8 +40,8 @@ public class OrderService {
     }
 
     public Order getLastOrder(String userId) {
-        User User = UserService.getUserByTelegramId(userId);
-        Order order = orderRepository.findByUserIdAndOrderStatus(User.getId(), null);
+        User user = UserService.getUserByTelegramId(userId);
+        Order order = orderRepository.findByUserIdAndOrderStatus(user.getId(), null);
         if (order == null){
             order = new Order();
             order.setUser(UserService.getUserByTelegramId(userId));

@@ -1,6 +1,6 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.models.dtos;
 
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.Patisserie;
+import com.github.AlexanderSobko.MatteoSweetsBot.models.entities.Patisserie;
 import com.github.AlexanderSobko.MatteoSweetsBot.enums.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;

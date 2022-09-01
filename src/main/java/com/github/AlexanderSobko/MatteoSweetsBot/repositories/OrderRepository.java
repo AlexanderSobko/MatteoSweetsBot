@@ -1,6 +1,6 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.repositories;
 
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.Order;
+import com.github.AlexanderSobko.MatteoSweetsBot.models.entities.Order;
 import com.github.AlexanderSobko.MatteoSweetsBot.enums.OrderStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

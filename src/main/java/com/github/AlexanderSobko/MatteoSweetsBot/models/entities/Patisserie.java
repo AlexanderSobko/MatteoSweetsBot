@@ -1,4 +1,4 @@
-package com.github.AlexanderSobko.MatteoSweetsBot.entities;
+package com.github.AlexanderSobko.MatteoSweetsBot.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.AlexanderSobko.MatteoSweetsBot.enums.PatisserieSubType;

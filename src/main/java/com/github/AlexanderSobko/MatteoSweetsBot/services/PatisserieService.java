@@ -1,7 +1,7 @@
 package com.github.AlexanderSobko.MatteoSweetsBot.services;
 
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.Order;
-import com.github.AlexanderSobko.MatteoSweetsBot.entities.Patisserie;
+import com.github.AlexanderSobko.MatteoSweetsBot.models.entities.Order;
+import com.github.AlexanderSobko.MatteoSweetsBot.models.entities.Patisserie;
 import com.github.AlexanderSobko.MatteoSweetsBot.enums.PatisserieSubType;
 import com.github.AlexanderSobko.MatteoSweetsBot.enums.PatisserieType;
 import com.github.AlexanderSobko.MatteoSweetsBot.repositories.PatisserieRepository;
