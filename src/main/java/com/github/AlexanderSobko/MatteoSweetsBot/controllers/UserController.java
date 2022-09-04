@@ -29,11 +29,9 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @PutMapping("{id}")
-    public User updateCustomer(@Valid @RequestBody User newData, @PathVariable(value = "id") Long id){
-        System.out.println(newData);
-//        ------------------------------------------------------------------------------------------------------
-        return newData;
+    @PutMapping
+    public User updateCustomer(@Valid @RequestBody User newData){
+        return userService.save(newData);
     }
 
     @PostMapping

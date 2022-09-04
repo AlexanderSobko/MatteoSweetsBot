@@ -12,7 +12,7 @@ import static com.github.AlexanderSobko.MatteoSweetsBot.enums.PatisserieSubType.
 import static com.github.AlexanderSobko.MatteoSweetsBot.enums.PatisserieSubType.MOUSSE_CAKE;
 
 @Data
-@Entity
+@Entity(name = "patisseries")
 @NoArgsConstructor
 public class Patisserie {
 
